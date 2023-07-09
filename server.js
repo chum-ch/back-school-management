@@ -1,56 +1,65 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+/* eslint-disable no-console */
+const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
 // Import file
-const Authentication = require('./controller/Authentication');
-const StudentController = require('./controller/StudentController');
-const TrainerController = require('./controller/TrainerController');
-const CleanerController = require('./controller/CleanerController');
+const UsersController = require('./controller/UsersController');
+const SchoolsController = require('./controller/SchoolsController');
+const TrainersController = require('./controller/TrainersController');
+const RoomsController = require('./controller/RoomsController');
+const StudentsController = require('./controller/StudentsController');
 // configure middleware
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: false,
-  })
+  }),
 );
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-    res.header("Access-Control-Allow-Headers", "*");
-    next();
-  });
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', '*');
+  next();
+});
 
 const PORT = 3003;
-app.listen(PORT,'localhost', () => {
-  console.log(`Server is running http://localhost:${PORT}`)
-})
+app.listen(PORT, 'localhost', () => {
+  console.log(`Server is running http://localhost:${PORT}`);
+});
 
-// Rute Authentication
-app.post('/login', Authentication.login);
-app.get('/users', Authentication.listUsers);
-app.get('/users/:users_id', Authentication.getUser);
-app.put('/users/:users_id', Authentication.updateUser);
-app.delete('/users/:users_id', Authentication.deleteUser);
+// Rute UsersController
+app.post('/login', UsersController.loginUser);
+app.post('/users', UsersController.createUser);
+app.get('/users', UsersController.listUsers);
+app.get('/users/:userId', UsersController.getUser);
+app.put('/users/:userId', UsersController.updateUser);
+app.delete('/users/:userId', UsersController.deleteUser);
 
+// Rute School
+app.get('/schools', SchoolsController.listSchools);
+app.post('/schools', SchoolsController.createSchool);
+app.put('/schools/:schoolId', SchoolsController.updateSchool);
+app.get('/schools/:schoolId', SchoolsController.getSchool);
+app.delete('/schools/:schoolId', SchoolsController.deleteSchool);
+
+// // Rute Trainer
+app.get('/schools/:schoolId/trainers', TrainersController.listTrainers);
+app.post('/schools/:schoolId/trainers', TrainersController.createTrainer);
+app.put('/schools/:schoolId/trainers/:trainerId', TrainersController.updateTrainer);
+app.get('/schools/:schoolId/trainers/:trainerId', TrainersController.getTrainer);
+app.delete('/schools/:schoolId/trainers/:trainerId', TrainersController.deleteTrainer);
+// // Rute Rooms
+app.get('/schools/:schoolId/rooms', RoomsController.listRooms);
+app.post('/schools/:schoolId/rooms', RoomsController.createRoom);
+app.put('/schools/:schoolId/rooms/:roomId', RoomsController.updateRoom);
+app.get('/schools/:schoolId/rooms/:roomId', RoomsController.getRoom);
+app.delete('/schools/:schoolId/rooms/:roomId', RoomsController.deleteRoom);
 // Rute Student
-app.get('/students', StudentController.ListStudents);
-app.post('/students', StudentController.createStudent);
-app.put('/students/:id', StudentController.updateStudent);
-app.get('/students/:id', StudentController.getStudent);
-app.delete('/students/:id', StudentController.deleteStudent);
-// Rute Trainer
-app.get('/trainers', TrainerController.ListTrainers);
-app.post('/trainers', TrainerController.createTrainer);
-app.put('/trainers/:id', TrainerController.updateTrainer);
-app.get('/trainers/:id', TrainerController.getTrainer);
-app.delete('/trainers/:id', TrainerController.deleteTrainer);
-// Rute Clearner
-app.get('/cleaners', CleanerController.ListCleaners);
-app.post('/cleaners', CleanerController.createCleaner);
-app.put('/cleaners/:id', CleanerController.updateCleaner);
-app.get('/cleaners/:id', CleanerController.getCleaner);
-app.delete('/cleaners/:id', CleanerController.deleteCleaner);
-
-
+app.get('/schools/:schoolId/students', StudentsController.listStudents);
+app.post('/schools/:schoolId/students', StudentsController.createStudent);
+app.put('/schools/:schoolId/students/:studentId', StudentsController.updateStudent);
+app.get('/schools/:schoolId/students/:studentId', StudentsController.getStudent);
+app.delete('/schools/:schoolId/students/:studentId', StudentsController.deleteStudent);
