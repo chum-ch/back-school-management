@@ -39,10 +39,10 @@ const getSchedule = async function getSchedule(req, res) {
 
 const updateSchedule = async function updateSchedule(req, res) {
   try {
-    const student = await db.cnUpdateOneItem(req, req.params.studentId);
-    res.status(statusCode.OK).send(student);
+    const schedule = await db.cnUpdateOneItem(req, req.params.scheduleId);
+    res.status(statusCode.OK).send(schedule);
   } catch (error) {
-    console.log('Error update student', error);
+    console.log('Error update schedule', error);
     res.status(statusCode.SERVER_ERROR).send(error);
   }
 };
