@@ -6,7 +6,7 @@ const statusCode = require('../utils/statusCode');
 const listUsers = async function listUsers(req, res) {
   try {
     const userCollection = await db.cnLisCollection();
-    const users = await db.cnListItems(userCollection.users);
+    const users = await db.cnListItems(req, userCollection.users);
     res.status(statusCode.OK).send(users);
   } catch (error) {
     console.log('Error list users', error);
@@ -17,7 +17,7 @@ const listUsers = async function listUsers(req, res) {
 const loginUser = async function loginUser(req, res) {
   try {
     const userCollection = await db.cnLisCollection();
-    const users = await db.cnListItems(userCollection.users, { Email: req.body.Email.toLowerCase() });
+    const users = await db.cnListItems(req, userCollection.users, { Email: req.body.Email.toLowerCase() });
     if (users.length === 0) {
       res.status(statusCode.NOT_FOUND).send({ message: `Email ${req.body.Email.toLowerCase()} is not found.` });
     } else if (users.length > 0 && users.find((item) => item.Password !== req.body.Password)) {

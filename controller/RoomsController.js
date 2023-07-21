@@ -6,8 +6,8 @@ const statusCode = require('../utils/statusCode');
 const listRooms = async function listRooms(req, res) {
   try {
     const roomCollection = await db.cnLisCollection();
-    const rooms = await db.cnListItems(roomCollection.rooms, { SCHOOLS_ID: req.params.schoolId });
-    // const rooms = await db.cnDeleteAllItem(roomCollection.rooms);
+    const rooms = await db.cnListItems(req, roomCollection.rooms, { SCHOOLS_ID: req.params.schoolId });
+    // const rooms = await db.cnDeleteAllItem(req, roomCollection.rooms);
     res.status(statusCode.OK).send(rooms);
   } catch (error) {
     console.log('Error list rooms', error);

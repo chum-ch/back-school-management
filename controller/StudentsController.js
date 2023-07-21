@@ -5,9 +5,10 @@ const statusCode = require('../utils/statusCode');
 
 const listStudents = async function listStudents(req, res) {
   try {
+    console.log(req.query);
     const studentCollection = await db.cnLisCollection();
-    const students = await db.cnListItems(studentCollection.students, { SCHOOLS_ID: req.params.schoolId });
-    // const students = await db.cnDeleteAllItem(studentCollection.students);
+    const students = await db.cnListItems(req, studentCollection.students, { SCHOOLS_ID: req.params.schoolId });
+    // const students = await db.cnDeleteAllItem(req, studentCollection.students);
     res.status(statusCode.OK).send(students);
   } catch (error) {
     console.log('Error list students', error);

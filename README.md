@@ -1,5 +1,7 @@
 # back-school-management
-Using NodeJs and store data in XAMPP 
-## DB
-Database's name ``node_js``
-table's name ``users trainers students cleaners``
+Using NodeJs and store data in MongoDB 
+## MongoDB
+1. Update submodule 
+  ```
+  git submodule update --init
+  ```

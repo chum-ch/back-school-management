@@ -6,8 +6,8 @@ const statusCode = require('../utils/statusCode');
 const listTrainers = async function listTrainers(req, res) {
   try {
     const trainerCollection = await db.cnLisCollection();
-    const trainers = await db.cnListItems(trainerCollection.trainers, { SCHOOLS_ID: req.params.schoolId });
-    // const trainers = await db.cnDeleteAllItem(trainerCollection.trainers);
+    const trainers = await db.cnListItems(req, trainerCollection.trainers, { SCHOOLS_ID: req.params.schoolId });
+    // const trainers = await db.cnDeleteAllItem(req, trainerCollection.trainers);
     res.status(statusCode.OK).send(trainers);
   } catch (error) {
     console.log('Error list trainers', error);

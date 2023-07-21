@@ -5,7 +5,7 @@ const statusCode = require('../utils/statusCode');
 const listSchools = async function listSchools(req, res) {
   try {
     const schoolCollection = await db.cnLisCollection();
-    const schools = await db.cnListItems(schoolCollection.schools);
+    const schools = await db.cnListItems(req, schoolCollection.schools);
     res.status(statusCode.OK).send(schools);
   } catch (error) {
     console.log('Error list schools', error);
