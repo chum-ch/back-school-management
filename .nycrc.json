@@ -1,0 +1,17 @@
+{
+  "all": true,
+  "include": ["controller/**/*.js"],
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "exclude": [
+    "submodule/*"
+  ],
+  "check-coverage": true,
+  "per-file": false,
+  "lines": 80,
+  "branches": 70,
+  "functions": 90,
+  "statements": 80
+}

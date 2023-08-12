@@ -1,57 +1,67 @@
 /* eslint-disable no-console */
 const db = require('../submodule/mongodb/mongodb');
 const statusCode = require('../utils/statusCode');
+const Service = require('./Service');
 
-const listSchools = async function listSchools(req, res) {
-  try {
-    const schoolCollection = await db.cnLisCollection();
-    const schools = await db.cnListItems(req, schoolCollection.schools);
-    res.status(statusCode.OK).send(schools);
-  } catch (error) {
-    console.log('Error list schools', error);
-    res.status(statusCode.SERVER_ERROR).send(error);
-  }
+const listSchools = function listSchools(req) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const schoolCollection = await db.cnLisCollection();
+      const schools = await db.cnListItems(req, schoolCollection.schools);
+      resolve(Service.successResponse(schools, statusCode.OK))
+    } catch (error) {
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
+    }
+  });
 };
 
-const createSchool = async function createSchool(req, res) {
-  try {
-    const schoolCollection = await db.cnLisCollection();
-    const school = await db.cnInsertOneItem(req, schoolCollection.schools);
-    res.status(statusCode.CREATED).send(school);
-  } catch (error) {
-    console.log('Error create school', error);
-    res.status(statusCode.SERVER_ERROR).send(error);
-  }
+const createSchool = async function createSchool(req) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const schoolCollection = await db.cnLisCollection();
+      const school = await db.cnInsertOneItem(req, schoolCollection.schools);
+      resolve(Service.successResponse(school, statusCode.OK))
+    } catch (error) {
+      console.log('Error create school', error);
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
+    }
+  })
 };
 
-const getSchool = async function getSchool(req, res) {
-  try {
-    const school = await db.cnGetItem(req.params.schoolId);
-    res.status(statusCode.OK).send(school);
-  } catch (error) {
-    console.log('Error get school', error);
-    res.status(statusCode.SERVER_ERROR).send(error);
-  }
+const getSchool = async function getSchool(req) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const school = await db.cnGetItem(req.params.schoolId);
+      resolve(Service.successResponse(school, statusCode.OK))
+    } catch (error) {
+      console.log('Error get school', error);
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
+    }
+  })
 };
 
-const updateSchool = async function updateSchool(req, res) {
-  try {
-    const school = await db.cnUpdateOneItem(req, req.params.schoolId);
-    res.status(statusCode.OK).send(school);
-  } catch (error) {
-    console.log('Error update school', error);
-    res.status(statusCode.SERVER_ERROR).send(error);
-  }
+const updateSchool = async function updateSchool(req) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const school = await db.cnUpdateOneItem(req, req.params.schoolId);
+      resolve(Service.successResponse(school, statusCode.OK))
+    } catch (error) {
+      console.log('Error update school', error);
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
+    }
+  })
 };
 
-const deleteSchool = async function deleteSchool(req, res) {
-  try {
-    const school = await db.cnDeleteOneItem(req.params.schoolId);
-    res.status(statusCode.OK).send(school);
-  } catch (error) {
-    console.log('Error delete school', error);
-    res.status(statusCode.SERVER_ERROR).send(error);
-  }
+const deleteSchool = async function deleteSchool(req) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const school = await db.cnDeleteOneItem(req.params.schoolId);
+      resolve(Service.successResponse(school, statusCode.OK))
+    } catch (error) {
+      console.log('Error delete school', error);
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
+    }
+  })
 };
 
 module.exports = {
