@@ -7,7 +7,7 @@ const Service = require('./Service');
 const listClasses = async function listClasses(req) {
   return new Promise(async (resolve, reject) => {
     try {
-      const classCollection = await db.cnLisCollection();
+      const classCollection = await db.cnListCollection();
       const classes = await db.cnListItems(req, classCollection.classes, { SCHOOLS_ID: req.params.schoolId });
       // const classes = await db.cnDeleteAllItem(req, classCollection.classes);
       resolve(Service.successResponse(classes, statusCode.OK));
@@ -23,7 +23,7 @@ const createClass = async function createClass(req) {
   return new Promise(async (resolve, reject) => {
     try {
       req.body.SCHOOLS_ID = req.params.schoolId;
-      const classCollection = await db.cnLisCollection();
+      const classCollection = await db.cnListCollection();
       const insertClass = await db.cnInsertOneItem(req, classCollection.classes);
       resolve(Service.successResponse(insertClass, statusCode.CREATED));
     } catch (error) {

@@ -7,7 +7,7 @@ const statusCode = require('../utils/statusCode');
 const listGenerations = async function listGenerations(req) {
   return new Promise(async (resolve, reject) => {
     try {
-      const generationCollection = await db.cnLisCollection();
+      const generationCollection = await db.cnListCollection();
       
       let generations = await db.cnListItems(req, generationCollection.generations, { SCHOOLS_ID: req.params.schoolId });
       if (generations && generations.length > 0) {
@@ -30,7 +30,7 @@ const createGeneration = async function createGeneration(req) {
   return new Promise(async (resolve, reject) => {
     try {
       req.body.SCHOOLS_ID = req.params.schoolId;
-      const generationCollection = await db.cnLisCollection();
+      const generationCollection = await db.cnListCollection();
       const generation = await db.cnInsertOneItem(req, generationCollection.generations);
       resolve(Service.successResponse(generation, statusCode.OK))
     } catch (error) {

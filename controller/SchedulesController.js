@@ -7,7 +7,7 @@ const Service = require('./Service');
 const listSchedules = async function listSchedules(req) {
   return new Promise(async (resolve, reject) => {
     try {
-      const scheduleCollection = await db.cnLisCollection();
+      const scheduleCollection = await db.cnListCollection();
       const schedule = await db.cnListItems(req, scheduleCollection.schedules, { SCHOOLS_ID: req.params.schoolId });
       // const schedule = await db.cnDeleteAllItem(req, scheduleCollection.schedules);
       resolve(Service.successResponse(schedule, statusCode.OK))
@@ -23,7 +23,7 @@ const createSchedule = async function createSchedule(req) {
   return new Promise(async (resolve, reject) => {
     try {
       req.body.SCHOOLS_ID = req.params.schoolId;
-      const scheduleCollection = await db.cnLisCollection();
+      const scheduleCollection = await db.cnListCollection();
       const schedule = await db.cnInsertOneItem(req, scheduleCollection.schedules);
       resolve(Service.successResponse(schedule, statusCode.CREATED))
     } catch (error) {

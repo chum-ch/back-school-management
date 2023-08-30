@@ -16,8 +16,8 @@ const listRooms = async function listRooms(req, res) {
 const createRoom = async function createRoom(req, res) {
   try {
    
-    // const room = await API.RoomsController.createRoom(req);
-    res.status(statusCode.CREATED).send(room.data);
+    const room = await API.RoomsController.createRoom(req);
+    res.status(room.StatusCode).send(room.data);
   } catch (error) {
     console.log('API error create room', error);
     res.status(error.StatusCode).send(error);

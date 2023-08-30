@@ -7,7 +7,7 @@ const Service = require('./Service');
 const listStudents = async function listStudents(req) {
   return new Promise(async (resolve, reject) => {
     try {
-      const studentCollection = await db.cnLisCollection();
+      const studentCollection = await db.cnListCollection();
       const students = await db.cnListItems(req, studentCollection.students, { GENERATIONS_ID: req.params.generationId });
       // const students = await db.cnDeleteAllItem(req, studentCollection.students);
       resolve(Service.successResponse(students, statusCode.OK))
@@ -42,7 +42,7 @@ const createStudent = async function createStudent(req) {
   return new Promise(async (resolve, reject) => {
     try {
       req.body = { ...req.body, GENERATIONS_ID: req.params.generationId, SCHOOLS_ID: req.params.schoolId }
-      const studentCollection = await db.cnLisCollection();
+      const studentCollection = await db.cnListCollection();
       const student = await db.cnInsertOneItem(req, studentCollection.students);
       resolve(Service.successResponse(student, statusCode.CREATED))
     } catch (error) {

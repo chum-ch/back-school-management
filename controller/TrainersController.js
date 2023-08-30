@@ -7,7 +7,7 @@ const Service = require('./Service');
 const listTrainers = async function listTrainers(req) {
   return new Promise(async (resolve, reject) => {
     try {
-      const trainerCollection = await db.cnLisCollection();
+      const trainerCollection = await db.cnListCollection();
       const trainers = await db.cnListItems(req, trainerCollection.trainers, { SCHOOLS_ID: req.params.schoolId });
       // const trainers = await db.cnDeleteAllItem(req, trainerCollection.trainers);
       resolve(Service.successResponse(trainers, statusCode.OK))
@@ -23,7 +23,7 @@ const createTrainer = async function createTrainer(req) {
   return new Promise(async (resolve, reject) => {
     try {
       req.body.SCHOOLS_ID = req.params.schoolId;
-      const trainerCollection = await db.cnLisCollection();
+      const trainerCollection = await db.cnListCollection();
       const trainer = await db.cnInsertOneItem(req, trainerCollection.trainers);
       resolve(Service.successResponse(trainer, statusCode.CREATED))
     } catch (error) {

@@ -6,6 +6,7 @@ const RoomAPI = require('./RoomsAPI');
 const ScheduleAPI = require('./SchedulesAPI');
 const StudentAPI = require('./StudentsAPI');
 const TrainerAPI = require('./TrainersAPI');
+const ExamAPI = require('./ExamsAPI');
 const UserAPI = require('./UsersAPI');
 
 module.exports = {
@@ -18,4 +19,5 @@ module.exports = {
   StudentAPI,
   TrainerAPI,
   UserAPI,
+  ExamAPI,
 }

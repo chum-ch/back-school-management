@@ -7,7 +7,7 @@ const Service = require('./Service');
 const listUsers = async function listUsers(req, res) {
   return new Promise(async (resolve, reject) => {
     try {
-      const userCollection = await db.cnLisCollection();
+      const userCollection = await db.cnListCollection();
       const users = await db.cnListItems(req, userCollection.users);
       resolve(Service.successResponse(users, statusCode.OK))
     } catch (error) {
@@ -21,7 +21,7 @@ const listUsers = async function listUsers(req, res) {
 const loginUser = async function loginUser(req, res) {
   return new Promise(async (resolve, reject) => {
     try {
-      const userCollection = await db.cnLisCollection();
+      const userCollection = await db.cnListCollection();
       const users = await db.cnListItems(req, userCollection.users, { Email: req.body.Email.toLowerCase() });
       if (users.length === 0) {
         throw ({ message: `Email ${req.body.Email.toLowerCase()} is not found.` })
@@ -41,7 +41,7 @@ const loginUser = async function loginUser(req, res) {
 const createUser = async function createUser(req, res) {
   return new Promise(async (resolve, reject) => {
     try {
-      const userCollection = await db.cnLisCollection();
+      const userCollection = await db.cnListCollection();
       const user = await db.cnInsertOneItem(req, userCollection.users);
       resolve(Service.successResponse(user, statusCode.CREATED))
     } catch (error) {
