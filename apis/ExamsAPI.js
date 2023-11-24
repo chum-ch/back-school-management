@@ -15,7 +15,6 @@ const listExams = async function listExams(req, res) {
 
 const createExam = async function createExam(req, res) {
   try {
-
     const exam = await API.ExamsController.createExam(req);
     res.status(exam.StatusCode).send(exam.data);
   } catch (error) {

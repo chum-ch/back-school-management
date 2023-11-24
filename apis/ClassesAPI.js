@@ -4,7 +4,7 @@ const API = require('../controller/index');
 
 const listClasses = async function listClasses(req, res) {
   try {
-    const classes = await API.ClassesController.listClasses(req)
+    const classes = await API.ClassesController.listClasses(req);
     // const classes = await db.cnDeleteAllItem(req, classCollection.classes);
     res.status(classes.StatusCode).send(classes.data);
   } catch (error) {

@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 const express = require('express');
-const multer = require("multer");
+const multer = require('multer');
 const cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
+
 const app = express();
 
 // Enable CORS for all routes
@@ -29,12 +30,12 @@ const storage = multer.diskStorage({
   destination: 'images/',
   filename: (req, file, cb) => {
     cb(null, `IMG-${Date.now()}.${file.mimetype.split('/')[1]}`);
-  }
-})
+  },
+});
 const upload = multer({ storage });
 app.use(express.static('images'));
 
-// Route Upload image 
+// Route Upload image
 
 // Route UsersController
 app.post('/login', UsersController.loginUser);
@@ -90,8 +91,9 @@ app.put('/schools/:schoolId/rooms/:roomId', IndexAPI.RoomAPI.updateRoom);
 app.get('/schools/:schoolId/rooms/:roomId', IndexAPI.RoomAPI.getRoom);
 app.delete('/schools/:schoolId/rooms/:roomId', IndexAPI.RoomAPI.deleteRoom);
 // Route Student
-app.post('/students/:studentId/upload-images', upload.single("image"), IndexAPI.StudentAPI.uploadImage)
+app.post('/students/:studentId/upload-images', upload.single('image'), IndexAPI.StudentAPI.uploadImage);
 app.get('/schools/:schoolId/generations/:generationId/students', IndexAPI.StudentAPI.listStudents);
+app.get('/schools/:schoolId/students', IndexAPI.StudentAPI.listStudentsUnderSchool);
 app.post('/schools/:schoolId/generations/:generationId/students', IndexAPI.StudentAPI.createStudent);
 app.put('/schools/:schoolId/generations/:generationId/students/:studentId', IndexAPI.StudentAPI.updateStudent);
 app.get('/schools/:schoolId/generations/:generationId/students/:studentId', IndexAPI.StudentAPI.getStudent);
@@ -103,46 +105,45 @@ app.put('/schools/:schoolId/schedules/:scheduleId', IndexAPI.ScheduleAPI.updateS
 app.get('/schools/:schoolId/schedules/:scheduleId', IndexAPI.ScheduleAPI.getSchedule);
 app.delete('/schools/:schoolId/schedules/:scheduleId', IndexAPI.ScheduleAPI.deleteSchedule);
 
-const nodemailer = require("nodemailer")
+// const nodemailer = require("nodemailer")
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  secure: false, // use SSL
-  port: 587,
-  // service: 'gmail',
-  auth: {
-    user: "seangdana0@gmail.com", // Your email which would be sending
-    pass: 'seangdata_123#@!' //Your Email password
-    // pass: 'seangdata_123#@!' //Your Email password
-  },
-  tls: {
-    rejectUnauthorized: true
-  }
-  // host: process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io",
-  // port: parseInt(process.env.SMTP_PORT || '2525'),
-  // auth: {
-  //   user: process.env.SMTP_USER,
-  //   pass: process.env.SMTP_PASS
-  // }
-})
-
-const options = {
-  from: "seangdana0@gmail.com",
-  to: "yoeurnchum@gmail.com",
-  subject: "Sending email with Node mailer",
-  text: "xxx"
-}
-
-// transporter.sendMail(options, function (err, info) {
-//   if (err) {
-//     console.log(err)
-//     return
+// const transporter = nodemailer.createTransport({
+//   host: 'smtp.gmail.com',
+//   secure: false, // use SSL
+//   port: 587,
+//   // service: 'gmail',
+//   auth: {
+//     user: "seangdana0@gmail.com", // Your email which would be sending
+//     pass: 'seangdata_123#@!' //Your Email password
+//     // pass: 'seangdata_123#@!' //Your Email password
+//   },
+//   tls: {
+//     rejectUnauthorized: true
 //   }
-//   console.log("sent: " + info.response)
+//   // host: process.env.SMTP_HOST || "sandbox.smtp.mailtrap.io",
+//   // port: parseInt(process.env.SMTP_PORT || '2525'),
+//   // auth: {
+//   //   user: process.env.SMTP_USER,
+//   //   pass: process.env.SMTP_PASS
+//   // }
 // })
+
+// const options = {
+//   from: "seangdana0@gmail.com",
+//   to: "yoeurnchum@gmail.com",
+//   subject: "Sending email with Node mailer",
+//   text: "xxx"
+// }
+
+// // transporter.sendMail(options, function (err, info) {
+// //   if (err) {
+// //     console.log(err)
+// //     return
+// //   }
+// //   console.log("sent: " + info.response)
+// // })
 
 app.listen(process.env.PORT || 3003, 'localhost', () => {
   console.log(`Server is running http://${process.env.LOCAL_URL}:${process.env.PORT}`);
 });
-
 module.exports = app;

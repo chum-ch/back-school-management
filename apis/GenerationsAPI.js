@@ -4,7 +4,7 @@ const API = require('../controller/index');
 
 const listGenerations = async function listGenerations(req, res) {
   try {
-    let generations = await API.GenerationsController.listGenerations(req);
+    const generations = await API.GenerationsController.listGenerations(req);
     res.status(generations.StatusCode).send(generations.data);
   } catch (error) {
     console.log('API error list generation', error);

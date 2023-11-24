@@ -15,7 +15,6 @@ const listSchedules = async function listSchedules(req, res) {
 
 const createSchedule = async function createSchedule(req, res) {
   try {
-    
     const schedule = await API.SchedulesController.createSchedule(req);
     res.status(schedule.StatusCode).send(schedule.data);
   } catch (error) {

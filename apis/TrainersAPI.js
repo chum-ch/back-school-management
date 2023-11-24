@@ -15,7 +15,6 @@ const listTrainers = async function listTrainers(req, res) {
 
 const createTrainer = async function createTrainer(req, res) {
   try {
-
     const trainer = await API.TrainersController.createTrainer(req);
     res.status(trainer.StatusCode).send(trainer.data);
   } catch (error) {

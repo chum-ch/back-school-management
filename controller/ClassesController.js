@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 const db = require('../submodule/mongodb/mongodb');
@@ -13,10 +14,9 @@ const listClasses = async function listClasses(req) {
       resolve(Service.successResponse(classes, statusCode.OK));
     } catch (error) {
       console.log('Error list classes', error);
-      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR))
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
     }
-
-  })
+  });
 };
 
 const createClass = async function createClass(req) {
@@ -28,10 +28,9 @@ const createClass = async function createClass(req) {
       resolve(Service.successResponse(insertClass, statusCode.CREATED));
     } catch (error) {
       console.log('Error create class', error);
-      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR))
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
     }
-    
-  })
+  });
 };
 
 const getClass = async function getClass(req) {
@@ -41,10 +40,9 @@ const getClass = async function getClass(req) {
       resolve(Service.successResponse(classItem, statusCode.OK));
     } catch (error) {
       console.log('Error get class', error);
-      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR))
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
     }
-    
-  })
+  });
 };
 
 const updateClass = async function updateClass(req) {
@@ -57,10 +55,9 @@ const updateClass = async function updateClass(req) {
       resolve(Service.successResponse(classUpdate, statusCode.OK));
     } catch (error) {
       console.log('Error update class', error);
-      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR))
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
     }
-    
-  })
+  });
 };
 
 const deleteClass = async function deleteClass(req) {
@@ -70,10 +67,9 @@ const deleteClass = async function deleteClass(req) {
       resolve(Service.successResponse(classDelete, statusCode.OK));
     } catch (error) {
       console.log('Error delete class', error);
-      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR))
+      reject(Service.rejectResponse(error, statusCode.SERVER_ERROR));
     }
-    
-  })
+  });
 };
 
 module.exports = {

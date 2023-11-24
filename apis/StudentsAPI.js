@@ -12,6 +12,15 @@ const listStudents = async function listStudents(req, res) {
     res.status(error.StatusCode).send(error);
   }
 };
+const listStudentsUnderSchool = async function listStudentsUnderSchool(req, res) {
+  try {
+    const students = await API.StudentsController.listStudentsUnderSchool(req);
+    res.status(students.StatusCode).send(students.data);
+  } catch (error) {
+    console.log('API error list students under school', error);
+    res.status(error.StatusCode).send(error);
+  }
+};
 
 const uploadImage = async function uploadImage(req, res) {
   try {
@@ -63,5 +72,5 @@ const deleteStudent = async function deleteStudent(req, res) {
 };
 
 module.exports = {
-  createStudent, listStudents, getStudent, updateStudent, deleteStudent, uploadImage
+  createStudent, listStudents, getStudent, updateStudent, deleteStudent, uploadImage, listStudentsUnderSchool,
 };
