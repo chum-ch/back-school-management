@@ -5,7 +5,7 @@
   "main": "fruitsLib.js",
   "scripts": {
     "test": "nyc ./node_modules/.bin/mocha --ui tdd --timeout 300000",
-    "start": "nodemon server.js"
+    "start": "SERVICE_URL=https://ch-sms.onrender.com MONGO_DB=mongodb+srv://chum:yoeurnchum1999@cluster0.8sjctgv.mongodb.net/cn_db?retryWrites=true&w=majority nodemon server.js"
   },
   "author": "SRUN SOKNOEURN",
   "license": "ISC",
