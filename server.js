@@ -144,6 +144,6 @@ app.delete('/schools/:schoolId/schedules/:scheduleId', IndexAPI.ScheduleAPI.dele
 // // })
 
 app.listen(process.env.PORT || 3003, 'localhost', () => {
-  console.log(`Server is running http://${process.env.LOCAL_URL}:${process.env.PORT}`);
+  console.log(`Server is running ${process.env.LOCAL_URL}:${process.env.PORT}`);
 });
 module.exports = app;
