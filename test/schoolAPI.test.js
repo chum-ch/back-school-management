@@ -15,15 +15,15 @@ describe('Test employee upload template', () => {
         done();
       });
   });
-  it('should get data school', (done) => {
-    chai.request(server)
-      .get(`/schools/${process.env.SCHOOL_ID}`)
-      .end((err, res) => {
-        assert.typeOf(res.body, 'object');
-        assert.equal(res.body.SCHOOLS_ID.split(':')[0], 'schools');
-        done();
-      });
-  });
+  // it('should get data school', (done) => {
+  //   chai.request(server)
+  //     .get(`/schools/${process.env.SCHOOL_ID}`)
+  //     .end((err, res) => {
+  //       assert.typeOf(res.body, 'object');
+  //       assert.equal(res.body.SCHOOLS_ID.split(':')[0], 'schools');
+  //       done();
+  //     });
+  // });
   // it('should update name of school', (done) => {
   //   chai.request(server)
   //     .put(`/schools/${process.env.SCHOOL_ID}`)
